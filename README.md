@@ -13,3 +13,18 @@
     1. `@RestControllerAdvice` 또는 `@ControllerAdvice`를 사용하면 Controller에서 발생하는 모든 예외를 감지할 수 있다.
     2. ExceptionHandler에서 정해진 ErrorResponse 객체로 응답하게 되면 항상 일관성있는 에러 처리를 할 수 있게 된다.
 
+## 이슈 등록
+
+1. 도메인 모델링
+   1. 공통 엔티티로 만들 BaseEntity 추가
+      1. **모든 엔티티에서 사용할 공통된 속성을 정의하고 싶은 경우, `@MappedSuperclass`를 사용해 부모 엔티티에서 공통 속성을 정의하고 하위 엔티티에서 상속받아 사용할 수 있다.**
+      2. `@EntityListeners`: 엔티티에 특정한 이벤트가 발생하면 정해진 콜백 처리를 할 수 있다.
+      3. `AuditingEventListener`를 사용하면 엔티티가 생성될 때 `@CreatedDate`가 붙은 프로퍼티에 생성일시를 자동으로 넣어주고, 엔티티에 변경이 일어나면 `@LastModifiedDate`가 붙은 프로퍼티에 변경일시를 자동으로 넣어주게 된다.
+   2. `@EnableJpaAuditing`: AuditingEventListener를 사용하려면 `@EnableJpaAuditing` 애노테이션을 MainApplication에 추가해야 한다.
+   3. 이슈 관리 서비스의 핵심 엔티티인 이슈 엔티티 생성
+2. 리포지토리 생성
+3. 서비스 생성
+   1. request, response DTO를 생성
+4. 컨트롤러 생성
+5. API 테스트
+
