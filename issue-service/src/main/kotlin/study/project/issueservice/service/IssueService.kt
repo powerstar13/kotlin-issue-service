@@ -45,4 +45,22 @@ class IssueService(
 
         return IssueResponse(issue)
     }
+
+    @Transactional
+    fun edit(userId: Long, issueId: Long, request: IssueRequest): Any {
+
+        val issue = issueRepository.findByIdOrNull(issueId)
+            ?: throw NotFoundException("이슈가 존재하지 않습니다.")
+
+        return with(issue) {
+            this.summary = request.summary
+            this.description = request.description
+            this.userId = userId
+            this.type = request.type
+            this.priority = request.priority
+            this.status = request.status
+
+            IssueResponse(issueRepository.save(this))
+        }
+    }
 }

@@ -1,12 +1,6 @@
 package study.project.issueservice.controller
 
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import study.project.issueservice.config.AuthUser
 import study.project.issueservice.domain.type.IssueStatus
 import study.project.issueservice.dto.IssueRequest
@@ -38,4 +32,12 @@ class IssueController(
         @PathVariable id: Long,
     ) =
         issueService.get(id)
+
+    @PutMapping("/{id}")
+    fun edit(
+        authUser: AuthUser,
+        @PathVariable id: Long,
+        @RequestBody request: IssueRequest
+    ) =
+        issueService.edit(authUser.userId, id, request)
 }
