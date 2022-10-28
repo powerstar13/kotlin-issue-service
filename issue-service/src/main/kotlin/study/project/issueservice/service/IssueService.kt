@@ -47,7 +47,7 @@ class IssueService(
     }
 
     @Transactional
-    fun edit(userId: Long, issueId: Long, request: IssueRequest): Any {
+    fun edit(userId: Long, issueId: Long, request: IssueRequest): IssueResponse {
 
         val issue = issueRepository.findByIdOrNull(issueId)
             ?: throw NotFoundException("이슈가 존재하지 않습니다.")
@@ -63,4 +63,6 @@ class IssueService(
             IssueResponse(issueRepository.save(this))
         }
     }
+
+    fun delete(id: Long) = issueRepository.deleteById(id)
 }
