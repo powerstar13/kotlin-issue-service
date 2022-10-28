@@ -1,6 +1,7 @@
 package study.project.issueservice.dto
 
 import com.fasterxml.jackson.annotation.JsonFormat
+import study.project.issueservice.domain.Comment
 import study.project.issueservice.domain.Issue
 import study.project.issueservice.domain.type.IssuePriority
 import study.project.issueservice.domain.type.IssueStatus
@@ -17,6 +18,7 @@ data class IssueRequest(
 
 data class IssueResponse(
     val id: Long,
+    val comments: List<CommentResponse> = emptyList(),
     val summary: String,
     val description: String,
     val userId: Long,
@@ -34,6 +36,8 @@ data class IssueResponse(
             with(issue) {
                 IssueResponse(
                     id = id!!,
+                    comments = comments.sortedByDescending(Comment::id)
+                        .map(Comment::toResponse),
                     summary = summary,
                     description = description,
                     userId = userId,
