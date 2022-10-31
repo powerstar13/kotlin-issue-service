@@ -1,11 +1,7 @@
 package study.project.issueservice.controller
 
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.*
 import study.project.issueservice.config.AuthUser
 import study.project.issueservice.dto.CommentRequest
 import study.project.issueservice.service.CommentService
@@ -30,4 +26,13 @@ class CommentController(
         @RequestBody request: CommentRequest,
     ) =
         commentService.edit(id, authUser.userId, request)
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun delete(
+        authUser: AuthUser,
+        @PathVariable issueId: Long,
+        @PathVariable id: Long,
+    ) =
+        commentService.delete(issueId, id, authUser.userId)
 }

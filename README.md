@@ -71,3 +71,18 @@
 3. 리포지토리 작성
 4. API 테스트
 
+## 코멘트 삭제
+
+1. 컨트롤러 작성
+2. 서비스 작성
+3. API 테스트
+
+## 회원 인증 서비스 프로젝트 구성하기
+
+1. user-service 모듈 생성
+2. kapt 플러그인 추가
+3. WebFlux & Coroutine & R2DBC 의존성 사용
+4. schema.sql 작성
+5. server port 변경
+6. R2DBC Config 작성
+7. CORS 처리
