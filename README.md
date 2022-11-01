@@ -150,3 +150,12 @@
    1. createToken 작성
    2. decode 작성
 4. JwtUtilTest
+
+## 회원 가입
+
+1. 도메인 모델링
+2. 리포지토리
+3. 서비스
+4. BCyptUtil
+5. 컨트롤러
+6. API 테스트

@@ -10,4 +10,6 @@ dependencies {
     implementation("at.favre.lib:bcrypt:0.9.0")
 
     runtimeOnly("io.r2dbc:r2dbc-h2")
+
+    testImplementation("io.projectreactor:reactor-test")
 }
