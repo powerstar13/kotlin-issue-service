@@ -77,7 +77,11 @@
 2. 서비스 작성
 3. API 테스트
 
-## 회원 인증 서비스 프로젝트 구성하기
+---
+
+# 회원 인증 서비스
+
+## 프로젝트 구성하기
 
 1. user-service 모듈 생성
 2. kapt 플러그인 추가
@@ -86,3 +90,16 @@
 5. server port 변경
 6. R2DBC Config 작성
 7. CORS 처리
+
+## 공통 에러 처리
+
+1. 에러 응답 모델 정의
+   - code로 어떤 에러가 발생했는지 정의한다.
+      - HTTP status code만으로 모든 에러에 대한 케이스를 처리하기 어렵다.
+   - 에러가 발생했을 때 나타낼 메시지를 표시한다.
+      - 메시지에는 stacktrace와 같이 언어, 프레임워크 정보, DB 필드 등이 노출되면 절대 안 된다.
+2. Exception 구조 정의
+   1. 최상위 `ServerException`을 sealed class로 정의
+3. GlobalExceptionHandler 정의
+   1. 애플리케이션에서 발생하는 모든 예외를 처리하는 GlobalExceptionHandler를 정의한다.
+   2. ExceptionHandler에서 정해진 ErrorResponse 객체로 응답하게 되면 항상 일관성있는 에러 처리를 할 수 있게 된다.
