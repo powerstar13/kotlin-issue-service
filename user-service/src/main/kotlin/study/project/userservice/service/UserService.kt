@@ -1,11 +1,13 @@
 package study.project.userservice.service
 
+import com.auth0.jwt.interfaces.DecodedJWT
 import org.springframework.stereotype.Service
 import study.project.userservice.domain.User
 import study.project.userservice.domain.UserRepository
 import study.project.userservice.dto.SignInRequest
 import study.project.userservice.dto.SignInResponse
 import study.project.userservice.dto.SignUpRequest
+import study.project.userservice.exception.InvalidJwtTokenException
 import study.project.userservice.exception.PasswordNotMatchedException
 import study.project.userservice.exception.UserExistsException
 import study.project.userservice.exception.UserNotFoundException
@@ -69,4 +71,22 @@ class UserService(
 
     suspend fun logout(token: String) =
         cacheManager.awaitEvict(token)
+
+    suspend fun getByToken(token: String): User =
+        cacheManager.awaitGetOrPut(
+            key = token,
+            ttl = CACHE_TTL
+        ) {
+            // 캐시가 유효하지 않은 경우 동작
+            val decodedJWT: DecodedJWT = JwtUtil.decode(token, jwtProperties.secret, jwtProperties.issuer)
+
+            val userId = decodedJWT.claims["userId"]?.asLong()
+                ?: throw InvalidJwtTokenException()
+
+            getUser(userId)
+        }
+
+    suspend fun getUser(userId: Long): User =
+        userRepository.findById(userId)
+            ?: throw UserNotFoundException()
 }

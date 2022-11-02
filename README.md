@@ -166,3 +166,8 @@
 2. 서비스 작성
 3. CoroutineCahceManager 생성
 4. AuthToken 애노테이션 생성
+
+## 내정보 조회
+
+1. 컨트롤러 작성
+2. 서비스 작성
