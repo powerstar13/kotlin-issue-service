@@ -10,3 +10,11 @@ sealed class ServerException(
 data class UserExistsException(
     override val message: String = "이미 존재하는 유저입니다."
 ) : ServerException(HttpStatus.CONFLICT.value(), message)
+
+data class UserNotFoundException(
+    override val message: String = "유저가 존재하지 않습니다."
+) : ServerException(HttpStatus.NOT_FOUND.value(), message)
+
+data class PasswordNotMatchedException(
+    override val message: String = "패스워드가 잘못되었습니다."
+) : ServerException(HttpStatus.BAD_REQUEST.value(), message)

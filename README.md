@@ -159,3 +159,10 @@
 4. BCyptUtil
 5. 컨트롤러
 6. API 테스트
+
+## 로그인과 로그아웃
+
+1. 컨트롤러 작성
+2. 서비스 작성
+3. CoroutineCahceManager 생성
+4. AuthToken 애노테이션 생성
