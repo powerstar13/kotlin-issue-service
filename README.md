@@ -181,3 +181,7 @@
 
 1. 컨트롤러 작성
 2. 서비스 작성
+
+## 이슈 관리 서비스와 회원 인증 서비스 연동하기
+
+1. Spring 5부터 Deprecated 상태인 RestTemplate 대신 WebClient 사용을 위한 의존성
