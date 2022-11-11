@@ -185,3 +185,9 @@
 ## 이슈 관리 서비스와 회원 인증 서비스 연동하기
 
 1. Spring 5부터 Deprecated 상태인 RestTemplate 대신 WebClient 사용을 위한 의존성
+
+## 프론트 연동 및 기능 확인
+
+1. 이슈 서비스에 static 리소스에 접근하기 위한 설정 추가
+2. resources/js/config.js에 인증 서비스 url 추가
+   - 혹시 인증 서비스 경로가 변경되는 경우, 이 곳도 수정 필요
